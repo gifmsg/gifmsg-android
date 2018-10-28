@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity  {
     public ArrayList<String> urlArray = new ArrayList<>();
     public int arrayIndex = 1;
     public DraweeView mDrawee;
+    public EditText mSearch;
+    public String searchString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +57,33 @@ public class MainActivity extends AppCompatActivity  {
 
         mSend = findViewById(R.id.button);
         mDrawee = findViewById(R.id.gifs);
+        mSearch = findViewById(R.id.editText);
         mainContext = this;
+
+        mSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchString = mSearch.getText().toString();
+                search(searchString);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
     }
 
 
-    public void search(View view){
-        String searchString;
-        EditText mSearch = findViewById(R.id.editText);
-        searchString = mSearch.getText().toString();
+
+    public void search(String searchString){
         final String key = "T0TKTfdnfMi0mToCYjCuZPOK1hkn8Cy5";
 
         RequestQueue queue = Volley.newRequestQueue(this);
