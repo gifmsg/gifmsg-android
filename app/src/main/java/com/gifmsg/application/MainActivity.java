@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity  {
         Fresco.initialize(this);
         setContentView(R.layout.activity_main);
 
-        mSend = findViewById(R.id.button);
         mDrawee = findViewById(R.id.gifs);
         mSearch = findViewById(R.id.editText);
         mainContext = this;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity  {
         final String key = "T0TKTfdnfMi0mToCYjCuZPOK1hkn8Cy5";
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="https://api.giphy.com/v1/gifs/search?api_key=" + key + "&q=" + searchString + "&limit=25&offset=0&rating=G&lang=en";
+        final String url ="https://api.giphy.com/v1/gifs/search?api_key=" + key + "&q=" + searchString + "&limit=50&offset=0&rating=G&lang=en";
 
         System.out.println(url);
 
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity  {
                         for (int i=0; i < jArray.length(); i++)
                         {
                             try {
-                                JSONObject oneObject = jArray.getJSONObject(i).getJSONObject("images").getJSONObject("original");
+                                JSONObject oneObject = jArray.getJSONObject(i).getJSONObject("images").getJSONObject("preview_gif");
                                 // Pulling items from the array
                                 String oneObjectsItem = oneObject.getString("url");
                                 urlArray.add(oneObjectsItem);
@@ -129,8 +129,8 @@ public class MainActivity extends AppCompatActivity  {
                         }
 
                         RecyclerView recyclerView = findViewById(R.id.recyclerHolder);
-                        LinearLayoutManager layoutManager
-                                = new LinearLayoutManager(mainContext, LinearLayoutManager.HORIZONTAL, false);
+                        GridLayoutManager layoutManager
+                                = new GridLayoutManager(mainContext, 2);
                         recyclerView.setLayoutManager(layoutManager);
                         adapter = new MyRecyclerViewAdapter(mainContext, urlArray);
                         recyclerView.setAdapter(adapter);
