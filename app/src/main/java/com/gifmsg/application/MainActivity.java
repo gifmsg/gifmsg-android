@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity  {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
                         String responseString = response.toString();
                         try {
 
@@ -128,25 +127,4 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-//    public void setGif(View view){
-//        Uri uri;
-//        if(urlArray[arrayIndex] != null) {
-//            uri = Uri.parse(urlArray[arrayIndex]);
-//        } else {
-//            arrayIndex = 0;
-//            uri = Uri.parse(urlArray[arrayIndex]);
-//        }
-//        DraweeController controller = Fresco.newDraweeControllerBuilder()
-//                .setUri(uri)
-//                .setAutoPlayAnimations(true)
-//                .build();
-//        mDrawee.setController(controller);
-//
-//        if (arrayIndex <= 24){
-//            arrayIndex ++;
-//        } else {
-//            arrayIndex = 0;
-//        }
-//
-//    }
 }
