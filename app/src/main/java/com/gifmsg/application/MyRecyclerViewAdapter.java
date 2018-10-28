@@ -1,6 +1,7 @@
 package com.gifmsg.application;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,14 @@ import com.facebook.drawee.view.DraweeView;
 
 import java.util.ArrayList;
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>  {
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
 
     private ArrayList<String> mData;
     private LayoutInflater mInflater;
 //    private ItemClickListener mClickListener;
+
+
 
     MyRecyclerViewAdapter(Context context, ArrayList<String> data) {
         this.mInflater = LayoutInflater.from(context);
@@ -34,6 +37,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String uri = mData.get(position);
+
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setUri(uri)
                 .setAutoPlayAnimations(true)
@@ -48,10 +52,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     public class ViewHolder extends RecyclerView.ViewHolder  {
         DraweeView myDraweeView;
+        CardView myCardView;
 
         ViewHolder(View itemView) {
             super(itemView);
             myDraweeView = itemView.findViewById(R.id.gifs);
+            myCardView = itemView.findViewById(R.id.recyclerCard);
 //            itemView.setOnClickListener(this);
         }
 
